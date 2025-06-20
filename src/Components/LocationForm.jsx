@@ -1,11 +1,18 @@
 import { useState } from "react";
+import axios from "axios";
+
+const API_KEY = "a4c5a51dda2189ce653991886f5c90ec";
 
 export const LocationForm = () => {
   const [coordinates, setCoordinates] = useState({
     latitude: 0,
     longitude: 0,
   });
-  function handleLocationSearch(e) {}
+  function handleLocationSearch(e) {
+    e.preventDefault;
+
+    let response;
+  }
   function handleChange(e) {
     setCoordinates({ ...coordinates, [e.target.name]: Number(e.target.value) });
   }
@@ -15,9 +22,12 @@ export const LocationForm = () => {
         <form onSubmit={handleLocationSearch} className="space-y-4 text-black">
           <label htmlFor="latitude">Latitude</label>
           <input
-            type="text"
+            type="number"
             id="latitude"
             name="latitude"
+            step="0.01"
+            min="-90"
+            max="90"
             placeholder={"101"}
             required
             onChange={handleChange}
@@ -25,11 +35,14 @@ export const LocationForm = () => {
           />
           <label htmlFor="longitude">Longitutde</label>
           <input
-            type="text"
+            type="number"
             id="longitude"
             name="longitude"
+            step="0.01"
+            min="-180"
+            max="180"
             required
-            placeholder={"Longitude"}
+            placeholder={"202..."}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
