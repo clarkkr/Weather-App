@@ -17,7 +17,7 @@ export const LocationForm = () => {
     e.preventDefault();
 
     let response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&units=imperal&lon=${coordinates.longitude}&appid=${API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${API_KEY}&units=imperial`
     );
     setCurrentData(response.data);
     setLoading(false);
