@@ -1,4 +1,4 @@
-import LocationForm from "../Components/LocationForm";
+import { LocationForm } from "../Components/LocationForm";
 export const Home = () => {
   return (
     <div>
