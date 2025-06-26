@@ -3,6 +3,10 @@ import axios from "axios";
 import { CurrentWeather } from "../Components/CurrentWeather";
 import { Map } from "../Components/Map";
 
+{
+  /*Variable to hold my API key:
+  I understand this is unsafe however it is a free API anyone can use*/
+}
 const API_KEY = "a4c5a51dda2189ce653991886f5c90ec";
 
 export const LocationForm = () => {
@@ -21,11 +25,18 @@ export const LocationForm = () => {
   const [name, setName] = useState("");
 
   async function handleLocationSearch(e) {
+    {
+      /*Prevents page refresh on form submission*/
+    }
     e.preventDefault();
 
+    {
+      /*Variable to hold the response of the OpenWeather API call*/
+    }
     let response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${API_KEY}&units=imperial`
     );
+
     setCurrentData(response.data);
     setName(response.data.name);
     setLoading(false);
