@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function CurrentWeather({ weatherData }) {
+export function CurrentWeather({ weatherData, name }) {
   const [times, setTimes] = useState({
     currentDate: "",
     currentTime: "",
@@ -41,6 +41,27 @@ export function CurrentWeather({ weatherData }) {
     <div className="bg-white shadow-lg rounded-lg min-w-96">
       <div className="bg-blue-500 text-white text-center py-4">
         <h2 className="text-2xl font-semibold ">Current Weather Information</h2>
+      </div>
+
+      <div className="p-6">
+        <div className="flex justify-center mb-4">
+          <div className="bg-blue-100 rounded-full p-2">
+            <img
+              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              alt="Weather Icon"
+              className="w-20 h-20"
+            />
+          </div>
+        </div>
+        <div className="text-center mb-4">
+          <p className="text-xl font-medium text-gray-700">
+            {weatherData.weather[0].main}
+          </p>
+          <p className="text-gray-500 capitalize">
+            {weatherData.weather[0].description}
+          </p>
+          <p className="text-gray-500">{name}</p>
+        </div>
       </div>
 
       <div className="p-6">

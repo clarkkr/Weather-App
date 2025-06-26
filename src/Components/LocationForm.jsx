@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { CurrentWeather } from "../Components/CurrentWeather";
+import { Map } from "../Components/Map";
 
 const API_KEY = "a4c5a51dda2189ce653991886f5c90ec";
 
@@ -10,8 +11,14 @@ export const LocationForm = () => {
     longitude: 0,
   });
 
+  const [mapCoordinates, setMapCoordinates] = useState({
+    latitude: 0,
+    longitude: 0,
+  });
+
   const [currentData, setCurrentData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
 
   async function handleLocationSearch(e) {
     e.preventDefault();
@@ -20,13 +27,18 @@ export const LocationForm = () => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${API_KEY}&units=imperial`
     );
     setCurrentData(response.data);
+    setName(response.data.name);
     setLoading(false);
+    setMapCoordinates(coordinates);
   }
   function handleChange(e) {
     setCoordinates({ ...coordinates, [e.target.name]: Number(e.target.value) });
   }
   return (
     <div className="w-screen h-screen text-black flex flex-col bg-gradient-to-b from-blue-300 to-white">
+      <h3 className="text-2xl font-semibold text-gray-800 text-center mt-16 mb-4">
+        Latitude/Longitude Search
+      </h3>
       <div className="mx-auto p-6 bg-white shadow-md rounded-lg">
         <form onSubmit={handleLocationSearch} className="space-y-4 text-black">
           <label htmlFor="latitude">Latitude</label>
@@ -63,7 +75,27 @@ export const LocationForm = () => {
           </button>
         </form>
       </div>
-      {!loading && <CurrentWeather weatherData={currentData} />}
+      {!loading && (
+        <>
+          <div className="mt-16 flex flex-row justify-center space-x-12">
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+                Current Weather
+              </h3>
+              <CurrentWeather weatherData={currentData} name={name} />
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+                Location Map
+              </h3>
+              <Map
+                latitude={mapCoordinates.latitude}
+                longitude={mapCoordinates.longitude}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
