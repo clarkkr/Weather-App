@@ -35,7 +35,7 @@ export const LocationForm = () => {
     setCoordinates({ ...coordinates, [e.target.name]: Number(e.target.value) });
   }
   return (
-    <div className="w-screen h-screen text-black flex flex-col bg-gradient-to-b from-blue-300 to-white">
+    <div className="w-screen min-h-screen text-black flex flex-col bg-gradient-to-b from-blue-300 to-white">
       <h3 className="text-2xl font-semibold text-gray-800 text-center mt-16 mb-4">
         Latitude/Longitude Search
       </h3>
